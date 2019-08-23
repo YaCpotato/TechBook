@@ -9,11 +9,18 @@ from .models import Book
 def home(request):
     return render(request, 'blog/home.html')
 
+def book_list(request):
+    books = Book.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/book_list.html', {'books': books})
+
+
 def newBook(request):
     if request.method == "POST":
         form = BookForm(request.POST)
         if form.is_valid():
             book = form.save(commit=False)
+            #book.author = request.user
+            book.published_date = timezone.now()
             # book.Title = request.Title
             # book.Tink = request.Link
             book.save()

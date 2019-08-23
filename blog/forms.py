@@ -6,10 +6,10 @@ class BookForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('Title', 'Link',)
+        fields = ('title', 'link',)
 
 class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('Title', 'Content','Star')
+        fields = ('title', 'content','star')
