@@ -3,6 +3,7 @@ from django.utils import timezone
 
 class Book(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images',blank=True, null=True)
     title = models.CharField(max_length=32)
     link = models.CharField(max_length=200)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -16,7 +17,3 @@ class Review(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
     star = models.IntegerField()
-
-class Image(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images')

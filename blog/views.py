@@ -19,10 +19,8 @@ def newBook(request):
         form = BookForm(request.POST)
         if form.is_valid():
             book = form.save(commit=False)
-            #book.author = request.user
+            book.author = request.user
             book.published_date = timezone.now()
-            # book.Title = request.Title
-            # book.Tink = request.Link
             book.save()
             return redirect('book_detail', pk=book.pk)
     else:
