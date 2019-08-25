@@ -18,7 +18,11 @@ def newBook(request):
     if request.method == "POST":
         form = BookForm(request.POST)
         if form.is_valid():
-            book = form.save(commit=False)
+            book = Book()
+            print(request)
+            book.title = request.POST['title']
+            book.link = request.POST['link']
+            book.image = request.FILES['image']
             book.author = request.user
             book.published_date = timezone.now()
             book.save()
