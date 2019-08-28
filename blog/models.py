@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 class Book(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    author = models.CharField(max_length=20)
     image = models.ImageField(upload_to='images',blank=True, null=True)
     title = models.CharField(max_length=32)
     link = models.CharField(max_length=200)
@@ -13,7 +13,7 @@ class Book(models.Model):
         self.save()
 
 class Review(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    author = models.CharField(max_length=20)
     title = models.CharField(max_length=20)
     content = models.TextField()
     star = models.IntegerField()
