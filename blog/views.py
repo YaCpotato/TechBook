@@ -34,3 +34,16 @@ def newBook(request):
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     return render(request, 'blog/book_detail.html', {'book': book})
+
+def add_review_to_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.book = book
+            review.save()
+            return redirect('book_detail', pk=book.pk)
+    else:
+        form = ReviewForm()
+    return render(request, 'blog/add_review_to_book.html', {'form': form})

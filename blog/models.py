@@ -13,6 +13,7 @@ class Book(models.Model):
         self.save()
 
 class Review(models.Model):
+    book = models.ForeignKey('blog.Book', on_delete=models.CASCADE, related_name='reviews',blank=True, null=True)
     author = models.CharField(max_length=20)
     title = models.CharField(max_length=20)
     content = models.TextField()

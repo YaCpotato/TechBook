@@ -2,9 +2,31 @@
 
 {% block content %}
     <div class="post">
-        <h1>{{ book.Title }}</h1>
-        <p>{{ book.Link }}</p>
+        <div class="date">
+            {{ book.published_date }}
+        </div>
+
+            <h1>{{ book.title }}</h1>
+            {% if book.image %}
+
+            <div class ="image">
+                <img src="/{{ book.image.url }}" style="width:300px;height:auto">
+            </div>
+            {% endif %}
+            <p>{{ book.link }}</p>
     </div>
+
+    <hr>
+<a class="btn btn-default" href="{% url 'add_review_to_book' pk=book.pk %}">Add comment</a>
+{% for review in book.reviews.all %}
+    <div class="comments">
+        <strong>{{ review.author }}</strong>
+        <p>{{ review.content|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No reviews here yet :(</p>
+{% endfor %}
+
 {% endblock %}
 
-<hr>
+
