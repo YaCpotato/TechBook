@@ -21,6 +21,16 @@
 {% for review in book.reviews.all %}
     <div class="comments">
         <strong>{{ review.author }}</strong>
+        <strong>{{ review.title }}</strong>
+{% with ''|center:5 as range %}
+{% for i in range %}
+{% if i > review.star %}
+    <span class="glyphicon glyphicon-star"></span>
+{% else %}
+    <span class="glyphicon glyphicon-star-empty"></span>
+{% endif %}
+{% endfor %}
+{% endwith %}
         <p>{{ review.content|linebreaks }}</p>
     </div>
 {% empty %}
